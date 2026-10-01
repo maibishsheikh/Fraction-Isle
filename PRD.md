@@ -72,13 +72,13 @@ After finishing Fraction Isles, a student should be able to:
 ## 3. Audience and Context of Use
 
 ### 3.1 Primary learners
-Singapore primary students, roughly **P3–P6 (ages 8–12)**. Level mapping:
+Learners in **Grades 4–8 (roughly ages 9–14)**, spanning upper primary and lower secondary. The experience is scaffolded so younger learners can build concrete meaning while older learners can tackle multi-step reasoning and error analysis. Level mapping:
 
 | Level | Island | Typical grade |
 |---|---|---|
-| Easy | Sunrise Shore | P3 |
-| Medium | Tidepool Reef | P4 |
-| Hard | Summit Peak | P5–P6 |
+| Easy | Sunrise Shore | Grades 4–5 |
+| Medium | Tidepool Reef | Grades 5–7 |
+| Hard | Summit Peak | Grades 7–8 |
 
 > ⚠️ **Open item OQ-1:** confirm exact grade bands and syllabus scope against the current MOE primary mathematics syllabus before content freeze. The table in §4 is drawn from general knowledge of the syllabus and must be verified.
 
@@ -89,9 +89,9 @@ Singapore primary students, roughly **P3–P6 (ages 8–12)**. Level mapping:
 ### 3.3 Personas
 | Persona | Needs | Design response |
 |---|---|---|
-| **Aisyah, 8, P3, new to fractions** | Concrete things to drag; short text; reassurance | Easy island, audio on, hints free, no timers |
-| **Ryan, 10, P4, procedure-driven** | Reasons *why* "make same denominator" works | Common Ground station, Otto's Question 2 |
-| **Priya, 11, P5, fast but careless** | Catch slips; avoid rushing | Oops Desk, Otto's Three Questions, echo questions |
+| **Aisyah, 9, Grade 4, new to fractions** | Concrete things to manipulate; short text; reassurance | Easy island, audio on, hints free, no timers |
+| **Ryan, 11, Grade 6, procedure-driven** | Reasons *why* "make same denominator" works | Common Ground station, Otto's Question 2 |
+| **Priya, 14, Grade 8, fast but careless** | Catch slips; avoid rushing; explain reasoning | Oops Desk, Otto's Three Questions, echo questions |
 | **Mr. Tan, teacher** | Projectable, 30–40 min per level, clear misconception report | Level loop, Reflect summary |
 
 ### 3.4 Devices and environment

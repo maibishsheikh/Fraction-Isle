@@ -1,6 +1,6 @@
 # Fraction Isles
 
-Fraction Isles is a browser-based fractions learning module built from `PRD.md` and `TRD.md`.
+Fraction Isles is a browser-based fractions learning module built from `PRD.md` and `TRD.md` for students in Grades 4–8. It uses a concrete → visual → symbolic progression so learners can experiment before they calculate.
 
 ## Start locally
 
@@ -9,7 +9,7 @@ npm install
 npm run dev
 ```
 
-The current vertical slice covers the full phase journey with placeholder art and a deterministic starter practice set. Core fraction arithmetic is integer-only and lives in `src/core/fraction/`.
+The current vertical slice covers the full phase journey with placeholder art, a deterministic starter practice set, and four playable simulation missions per island. Core fraction arithmetic is integer-only and lives in `src/core/fraction/`.
 
 ## Project direction
 
@@ -18,4 +18,4 @@ The current vertical slice covers the full phase journey with placeholder art an
 - `src/content/` owns story and question content.
 - `src/styles/` owns the tropical paper-cut design tokens and responsive layout.
 
-Next implementation slice: replace the station completion cards with concrete keyboard/touch interactions, then move the starter practice questions into data-driven generators and add stress validation.
+Next implementation slice: expand the mission bank and move the starter practice questions into data-driven generators with stress validation.
