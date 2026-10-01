@@ -1,0 +1,87 @@
+import { describe, expect, it } from 'vitest';
+import { CONTENT } from '../src/content/v3.js';
+import { isEqualCutsBar } from '../src/core/helpers.js';
+import { evenCuts } from '../src/components/labs/WholeCutter.jsx';
+import { frac, equals, mulRaw } from '../src/core/fraction/index.js';
+import { pickOptions, productCandidates } from '../src/core/distractors.js';
+
+const lab = CONTENT.beginner.labs[0];
+const strings = (o) => (typeof o === 'string' ? [o] : o && typeof o === 'object' ? Object.entries(o).filter(([k]) => !['id', 'tag', 'c', 'narration'].includes(k)).flatMap(([, v]) => strings(v)) : []);
+
+describe('Beginner Lab A', () => {
+  it('shows no digits in any text', () => {
+    const t = strings({ i: lab.intro, r: lab.remember, t: lab.title, g: lab.guided.map((g) => g.goal), c: lab.checkin.map((c) => [c.prompt, c.options.map((o) => o.text)]), l: lab.explore.checklist.map((c) => c.label) });
+    expect(t.filter((s) => /\d/.test(s))).toEqual([]);
+  });
+  it('meets lab structure rules', () => {
+    expect(lab.explore.checklist.filter((c) => c.required).length).toBeGreaterThanOrEqual(4);
+    expect(lab.guided.length).toBeGreaterThanOrEqual(3);
+    expect(lab.checkin).toHaveLength(2);
+    lab.checkin.forEach((q) => { expect(q.options.filter((o) => o.id === q.correct)).toHaveLength(1); expect(new Set(q.options.map((o) => o.text)).size).toBe(q.options.length); });
+  });
+  it('guided cuts are verifiable and the spot-it bar is the only unfair one', () => {
+    [2, 3, 4].forEach((n) => expect(isEqualCutsBar(evenCuts(n), 12, n)).toBe(true));
+    const spot = lab.guided.find((g) => g.spot);
+    const fairBar = (w) => w.every((x) => x === w[0]);
+    expect(spot.bars.map(fairBar).filter((f) => !f)).toHaveLength(1);
+    expect(fairBar(spot.bars[spot.odd])).toBe(false);
+  });
+});
+describe('distractors', () => {
+  it('never repeats the correct value', () => {
+    const a = frac(2, 3); const b = frac(3, 4); const correct = mulRaw(a, b);
+    const opts = pickOptions(correct, productCandidates(a, b));
+    expect(opts.every((o) => !equals(o.f, correct))).toBe(true);
+    expect(opts.length).toBe(3);
+  });
+});
+
+import { validateContent } from '../src/utils/validateContent.js';
+import { MISCONCEPTIONS } from '../src/content/misconceptions.js';
+describe('validateContent', () => {
+  it('passes for all levels', () => { expect(validateContent(CONTENT)).toEqual([]); });
+  it('has feedback lines of at most 12 words and none say wrong', () => {
+    Object.values(MISCONCEPTIONS).forEach((l) => { expect(l.split(/\s+/).length).toBeLessThanOrEqual(12); expect(/wrong/i.test(l)).toBe(false); });
+  });
+  it('Lab B guided targets are reachable', () => {
+    CONTENT.beginner.labs[1].guided.forEach((g) => { const d = g.read ? g.read[1] : g.d; expect([2, 3, 4, 5, 6, 8]).toContain(d); });
+  });
+});
+
+import { winnerOf } from '../src/components/games/CrabRace.jsx';
+import { GADGETS } from '../src/components/labs/ShoreGadgets.jsx';
+import { sortedAsc, longer } from '../src/components/labs/SliceRace.jsx';
+describe('Beginner Labs C–D and Crab Race', () => {
+  const [, , C, D] = CONTENT.beginner.labs;
+  const crab = CONTENT.beginner.games[3];
+  it('crab race has 7 rounds with the spec winners', () => {
+    expect(crab.rounds).toHaveLength(7);
+    expect(crab.rounds.map((r) => winnerOf(r.l, r.r))).toEqual(['l', 'l', 'r', 'r', 'r', 'r', 'same']);
+  });
+  it('guided gadget targets are reachable on their marks', () => {
+    C.guided.forEach((t) => { const g = GADGETS.find((x) => x.key === t.gadget); expect(g.opts).toContain(t.p); expect((t.target[0] * t.p) % t.target[1]).toBe(0); });
+  });
+  it('slice race answers recompute', () => {
+    const sort = D.guided.find((t) => t.type === 'sort');
+    expect(sortedAsc(sort.items).map((f) => f.join('/'))).toEqual(['1/8', '1/6', '1/4', '1/3', '1/2']);
+    expect(longer([1, 2], [1, 4])).toBe(0); expect(longer([3, 8], [5, 8])).toBe(1);
+  });
+});
+
+import { FISHING } from '../src/content/beginner/fishing.js';
+import { BUILDER_LABS } from '../src/content/builder/labs.js';
+import { ADVANCED_LAB_A } from '../src/content/advanced/labs.js';
+describe('Fishing, Wall and Area labs', () => {
+  const val = (x) => (typeof x[0] === 'string' ? x[2] / x[1] : x[0] / x[1]);
+  it('fishing: fish[0] matches the bait by value and no distractor does', () => {
+    expect(FISHING.rounds).toHaveLength(8);
+    FISHING.rounds.forEach((r) => { const b = val(r.bait); expect(Math.abs(val(r.fish[0].x) - b)).toBeLessThan(1e-9); r.fish.slice(1).forEach((f) => expect(Math.abs(val(f.x) - b)).toBeGreaterThan(1e-9)); });
+  });
+  it('wall guided targets land on whole cells', () => {
+    Object.values(BUILDER_LABS).forEach((l) => l.guided.forEach((t) => expect((t.target[0] * t.row) % t.target[1]).toBe(0)));
+  });
+  it('area guided: columns/rows give the stated product', () => {
+    ADVANCED_LAB_A.guided.forEach((t) => { expect(t.c).toBeLessThanOrEqual(t.cols); expect(t.r).toBeLessThanOrEqual(t.rows); });
+    const t = ADVANCED_LAB_A.guided[2]; expect((t.c * t.r) / (t.cols * t.rows)).toBe(0.5);
+  });
+});

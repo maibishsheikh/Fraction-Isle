@@ -1,3 +1,9 @@
+import { LAB_A } from './beginner/labA.js';
+import { LAB_B } from './beginner/labB.js';
+import { LAB_C, LAB_D, CRAB_GAME } from './beginner/labCD.js';
+import { FISHING } from './beginner/fishing.js';
+import { BUILDER_LABS } from './builder/labs.js';
+import { ADVANCED_LAB_A } from './advanced/labs.js';
 const choice = (id, prompt, correct, wrong, visual = { parts: 4, shaded: 2 }) => ({ id, prompt, narration: prompt, visual, options: [{ id: 'yes', text: correct }, ...wrong.map(([text, tag], i) => ({ id: `no${i}`, text, tag }))], correct: 'yes', hints: [{ text: 'Look at all the equal parts.', narration: 'Look at all the equal parts.' }], explain: 'That picture shows it clearly.', explainNarration: 'That picture shows it clearly.' });
 const labs = (items) => items.map(([id, letter, title, icon, remember, intro, parts, shaded, guided, checks], i) => ({ id, letter, title, icon, remember, intro: { text: intro, narration: intro }, explore: { parts, shaded, checklist: [{ key: 'tap', label: 'Tap a piece', required: true }, { key: 'shade', label: 'Colour some parts', required: true }, { key: 'change', label: 'Change the number of parts', required: true }, { key: 'read', label: 'Read the fraction', required: true }] }, guided: guided.map((goal, n) => ({ id: `${id}-${n}`, goal, narration: goal })), checkin: checks }));
 const rounds = (name, icon, items) => ({ title: name, icon, intro: `Build the picture, then answer ${name}.`, narration: `Build the picture, then answer ${name}.`, rounds: items.map(([prompt, answer, parts, shaded, ...wrong], i) => choice(`${name}-${i}`, prompt, answer, wrong, { parts, shaded })) });
@@ -53,3 +59,13 @@ export const CONTENT = {
     explain: ['Draw the whole bar.', 'Split to match the fraction.', 'Mark what is used.', 'Find what is left.', 'Check that it makes sense.'],
   },
 };
+Object.assign(CONTENT.beginner.labs[0], LAB_A);
+Object.assign(CONTENT.beginner.labs[1], LAB_B);
+Object.assign(CONTENT.beginner.labs[2], LAB_C);
+Object.assign(CONTENT.beginner.labs[3], LAB_D);
+CONTENT.beginner.games[3] = CRAB_GAME;
+CONTENT.beginner.games[1] = FISHING;
+Object.assign(CONTENT.builder.labs[0], BUILDER_LABS.a);
+Object.assign(CONTENT.builder.labs[1], BUILDER_LABS.b);
+Object.assign(CONTENT.builder.labs[3], BUILDER_LABS.d);
+Object.assign(CONTENT.advanced.labs[0], ADVANCED_LAB_A);
