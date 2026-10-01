@@ -1,9 +1,11 @@
 import { LEVELS, LEVEL_ORDER } from '../config/levels.js';
-export const trailOf = (levelId) => { const cfg = LEVELS[levelId]; const nodes = []; for (let i = 0; i < Math.max(cfg.lessonCount, cfg.gameCount); i += 1) { if (i < cfg.lessonCount) nodes.push({ kind: 'lesson', index: i }); if (i < cfg.gameCount) nodes.push({ kind: 'game', index: i }); } nodes.push({ kind: 'boss', index: 0 }); return nodes; };
-const isDone = (p, node) => node.kind === 'lesson' ? p.lessons[node.index] : node.kind === 'game' ? p.games[node.index].done : p.boss.done;
-export const nodeStatus = (state, levelId, index) => { const trail = trailOf(levelId); const p = state.levels[levelId]; if (isDone(p, trail[index])) return 'done'; if (state.settings.unlockAll) return 'available'; return trail.slice(0, index).every((node) => isDone(p, node)) ? 'available' : 'locked'; };
-export const nextNodeIndex = (state, levelId) => { const trail = trailOf(levelId); const p = state.levels[levelId]; const index = trail.findIndex((node) => !isDone(p, node)); return index === -1 ? trail.length - 1 : index; };
-export const levelUnlocked = (state, levelId) => { const index = LEVEL_ORDER.indexOf(levelId); return state.settings.unlockAll || index === 0 || state.levels[LEVEL_ORDER[index - 1]].boss.done; };
-export const levelProgress = (state, levelId) => { const trail = trailOf(levelId); const p = state.levels[levelId]; const done = trail.filter((node) => isDone(p, node)).length; return { done, total: trail.length, pct: Math.round((done / trail.length) * 100) }; };
-export const totalStars = (state) => LEVEL_ORDER.reduce((sum, id) => sum + state.levels[id].games.reduce((s, game) => s + game.stars, 0) + state.levels[id].boss.stars, 0);
+export const trailOf = (id) => [{ kind: 'wonder', index: 0 }, { kind: 'story', index: 0 }, ...Array.from({ length: LEVELS[id].labCount }, (_, index) => ({ kind: 'lab', index })), ...Array.from({ length: LEVELS[id].gameCount }, (_, index) => ({ kind: 'game', index })), { kind: 'boss', index: 0 }];
+export const isDone = (p, n) => n.kind === 'wonder' ? p.wonder : n.kind === 'story' ? p.story : n.kind === 'lab' ? p.labs[n.index] : n.kind === 'game' ? p.games[n.index].done : p.boss.done;
+export const nodeStatus = (state, id, index) => { const nodes = trailOf(id); if (isDone(state.levels[id], nodes[index])) return 'done'; return state.settings.unlockAll || nodes.slice(0, index).every((node) => isDone(state.levels[id], node)) ? 'available' : 'locked'; };
+export const nextNodeIndex = (state, id) => { const nodes = trailOf(id); const index = nodes.findIndex((node) => !isDone(state.levels[id], node)); return index < 0 ? nodes.length - 1 : index; };
+export const phaseOfNode = (n) => ({ wonder: 'wonder', story: 'story', lab: 'simulate', game: 'play', boss: 'reflect' })[n.kind];
+export const phaseProgress = (state, id) => { const out = { wonder: [0, 0], story: [0, 0], simulate: [0, 0], play: [0, 0], reflect: [0, 0] }; trailOf(id).forEach((n) => { const phase = phaseOfNode(n); out[phase][1] += 1; if (isDone(state.levels[id], n)) out[phase][0] += 1; }); return out; };
+export const levelUnlocked = (state, id) => { const index = LEVEL_ORDER.indexOf(id); return state.settings.unlockAll || index === 0 || state.levels[LEVEL_ORDER[index - 1]].boss.done; };
+export const levelProgress = (state, id) => { const nodes = trailOf(id); const done = nodes.filter((n) => isDone(state.levels[id], n)).length; return { done, total: nodes.length, pct: Math.round(100 * done / nodes.length) }; };
+export const totalStars = (state) => LEVEL_ORDER.reduce((sum, id) => sum + state.levels[id].games.reduce((n, g) => n + g.stars, 0) + state.levels[id].boss.stars, 0);
 export const allLevelsDone = (state) => LEVEL_ORDER.every((id) => state.levels[id].boss.done);

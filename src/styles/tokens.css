@@ -1,9 +1,4 @@
-:root {
-  --sand-50: #fff8ea; --sand-100: #fff1d6; --sand-200: #ffe2b5;
-  --ink-900: #12344d; --ink-600: #3d5c73; --ink-400: #71879a;
-  --lagoon-500: #1f9cc9; --teal-500: #14b8a6; --coral-500: #ff6b5b;
-  --sun-400: #ffc93c; --leaf-500: #3fbf7f; --berry-500: #8e5cd9;
-  --storm-500: #5b6b84; --error-500: #e5484d; --white: #fff;
-  --radius-sm: 12px; --radius-md: 20px; --radius-lg: 28px;
-  --shadow: 0 6px 0 rgba(18, 52, 77, .12); --shadow-soft: 0 12px 30px rgba(18, 52, 77, .10);
-}
+:root { --ink-900:#10294A; --ink-700:#2C4A6E; --ink-500:#5B7392; --ink-300:#A9B8CB; --paper:#fff; --paper-warm:#FFF9EE; --foam:#EAF8FB; --line:rgba(16,41,74,.12); --coral-500:#FF6B5B; --coral-600:#E94E3F; --sun-400:#FFC93C; --sun-500:#FFB020; --lagoon-400:#38C6D9; --lagoon-500:#1AA7C4; --teal-500:#14B8A6; --leaf-500:#3FBF7F; --violet-500:#7B5CFF; --violet-600:#5E3FE0; --magenta-400:#E86BD6; --ok-500:#2FB46A; --sky-sunrise:linear-gradient(180deg,#FFD7A8 0%,#FFE9C7 38%,#FFF6E3 100%); --sky-lagoon:linear-gradient(180deg,#9FE6F2 0%,#D3F4F8 40%,#F1FCFD 100%); --sky-twilight:linear-gradient(180deg,#2B1E6B 0%,#5B3FB8 48%,#E7A7E9 100%); --r-sm:14px; --r-md:22px; --r-lg:30px; --edge:0 6px 0 rgba(16,41,74,.14); --shadow-soft:0 14px 34px rgba(16,41,74,.14); --t-fast:150ms; }
+[data-level="beginner"] { --accent:var(--sun-500); --accent-2:var(--coral-500); --sky:var(--sky-sunrise); }
+[data-level="builder"] { --accent:var(--lagoon-500); --accent-2:var(--teal-500); --sky:var(--sky-lagoon); }
+[data-level="advanced"] { --accent:var(--violet-500); --accent-2:var(--magenta-400); --sky:var(--sky-twilight); }
