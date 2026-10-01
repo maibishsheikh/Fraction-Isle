@@ -1,0 +1,2 @@
+export const makeLevelProgress = () => ({ storyPanel: 0, stations: [false, false, false, false], questions: [false, false, false, false], answers: [], stars: 0, boss: false });
+export const initialState = { version: 1, phase: 'intro', level: 'easy', nickname: '', audioEnabled: true, calmMotion: false, wonderStep: 0, wonderDone: false, levels: { easy: makeLevelProgress(), medium: makeLevelProgress(), hard: makeLevelProgress() }, scoring: { xp: 0, streak: 0, maxStreak: 0 }, misconceptions: {}, reflectDone: false };

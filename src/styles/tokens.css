@@ -1,0 +1,9 @@
+:root {
+  --sand-50: #fff8ea; --sand-100: #fff1d6; --sand-200: #ffe2b5;
+  --ink-900: #12344d; --ink-600: #3d5c73; --ink-400: #71879a;
+  --lagoon-500: #1f9cc9; --teal-500: #14b8a6; --coral-500: #ff6b5b;
+  --sun-400: #ffc93c; --leaf-500: #3fbf7f; --berry-500: #8e5cd9;
+  --storm-500: #5b6b84; --error-500: #e5484d; --white: #fff;
+  --radius-sm: 12px; --radius-md: 20px; --radius-lg: 28px;
+  --shadow: 0 6px 0 rgba(18, 52, 77, .12); --shadow-soft: 0 12px 30px rgba(18, 52, 77, .10);
+}
