@@ -1,2 +1,19 @@
-export const makeLevelProgress = () => ({ storyPanel: 0, stations: [false, false, false, false], questions: [false, false, false, false], answers: [], stars: 0, boss: false });
-export const initialState = { version: 1, phase: 'intro', level: 'easy', nickname: '', audioEnabled: true, calmMotion: false, wonderStep: 0, wonderDone: false, levels: { easy: makeLevelProgress(), medium: makeLevelProgress(), hard: makeLevelProgress() }, scoring: { xp: 0, streak: 0, maxStreak: 0 }, misconceptions: {}, reflectDone: false };
+import { LEVELS, LEVEL_ORDER } from '../config/levels.js';
+
+export const makeLevelProgress = (levelId) => ({
+  lessons: Array(LEVELS[levelId].lessonCount).fill(false),
+  games: Array.from({ length: LEVELS[levelId].gameCount }, () => ({ done: false, stars: 0 })),
+  boss: { done: false, stars: 0, best: 0 },
+});
+
+export const makeInitialState = () => ({
+  version: 2,
+  route: { screen: 'home' },
+  nickname: '',
+  settings: { audio: true, calmMotion: false, unlockAll: false },
+  scoring: { xp: 0 },
+  levels: Object.fromEntries(LEVEL_ORDER.map((id) => [id, makeLevelProgress(id)])),
+  misconceptions: {},
+});
+
+export const initialState = makeInitialState();

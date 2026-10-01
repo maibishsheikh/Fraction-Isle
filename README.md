@@ -9,13 +9,14 @@ npm install
 npm run dev
 ```
 
-The current vertical slice covers the full phase journey with a visual-first learning arc: Beginner (see a fraction), Builder (use fractions in models and situations), and Advanced (solve and explain multi-step problems). It includes placeholder art, a deterministic starter practice set, and four playable simulation missions per island. Core fraction arithmetic is integer-only and lives in `src/core/fraction/`.
+The current redesign follows the v2 flow: Home level map → 9-stop level trail → Learn (See, Try, Check) → Play mini-game → Boss → Level Complete → Certificate. Beginner teaches what fractions are, Builder uses fractions in real life, and Advanced focuses on multi-step reasoning. Content is data-driven in `src/content/lessons`, `src/content/games`, and `src/content/boss`.
 
 ## Project direction
 
-- `src/app/` owns persisted reducer state and navigation.
+- `src/app/` owns v2 persisted reducer state, selectors, trail gating, and navigation.
+- `src/config/levels.js` defines the Beginner / Builder / Advanced progression.
 - `src/core/` owns exact arithmetic, speech, nodes, and seeded utilities.
-- `src/content/` owns story and question content.
+- `src/content/` owns lesson, game, and boss content.
 - `src/styles/` owns the tropical paper-cut design tokens and responsive layout.
 
-Next implementation slice: expand the visual mission bank with richer motion and move the starter practice questions into data-driven generators with stress validation.
+Next implementation slice: replace the generic game-choice rounds with the named touch interactions from the spec—Pizza Slicer, Fraction Fishing, Reef Café, Bridge Builder, Bar-Model Detective, and the remaining mini-games.
