@@ -9,7 +9,7 @@ npm install
 npm run dev
 ```
 
-The current vertical slice covers the full phase journey with placeholder art, a deterministic starter practice set, and four playable simulation missions per island. Core fraction arithmetic is integer-only and lives in `src/core/fraction/`.
+The current vertical slice covers the full phase journey with a visual-first learning arc: Beginner (see a fraction), Builder (use fractions in models and situations), and Advanced (solve and explain multi-step problems). It includes placeholder art, a deterministic starter practice set, and four playable simulation missions per island. Core fraction arithmetic is integer-only and lives in `src/core/fraction/`.
 
 ## Project direction
 
@@ -18,4 +18,4 @@ The current vertical slice covers the full phase journey with placeholder art, a
 - `src/content/` owns story and question content.
 - `src/styles/` owns the tropical paper-cut design tokens and responsive layout.
 
-Next implementation slice: expand the mission bank and move the starter practice questions into data-driven generators with stress validation.
+Next implementation slice: expand the visual mission bank with richer motion and move the starter practice questions into data-driven generators with stress validation.

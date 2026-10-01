@@ -1,17 +1,17 @@
 export const stories = {
   easy: { title: 'The Uneven Plank', panels: [
-    { kicker: 'Sunrise Shore · 1', title: 'The storm has landed', body: 'The dock is broken. Mei and Danish find a long plank, but the old cuts are not fair.', art: '🌴', idea: 'A fraction names equal parts of one whole.' },
-    { kicker: 'Sunrise Shore · 2', title: 'Otto asks a careful question', body: '“Are the pieces equal?” asks Otto. The island builders measure before they share.', art: '🦦', idea: 'The denominator counts equal parts; the numerator counts selected parts.' },
-    { kicker: 'Sunrise Shore · 3', title: 'One piece at a time', body: 'A fair dock needs fair pieces. The first island is ready for your measuring eye.', art: '🪵', idea: 'Fractions can be shown with objects, pictures, and symbols.' },
+    { kicker: 'Sunrise Shore · 1', title: 'Find the whole', body: 'The dock is broken. Start by spotting the whole thing before you split it.', art: '🌴', idea: 'A fraction is a part of one whole.', visual: 'whole' },
+    { kicker: 'Sunrise Shore · 2', title: 'Make fair pieces', body: 'Otto asks: “Are the pieces equal?” Fair shares have matching sizes.', art: '🦦', idea: 'The denominator counts equal parts.', visual: 'equal' },
+    { kicker: 'Sunrise Shore · 3', title: 'Read what you see', body: 'Count all the equal pieces. Then count the pieces we chose.', art: '🪵', idea: 'The numerator counts selected parts.', visual: 'fraction' },
   ] },
   medium: { title: 'The Mismatched Pieces', panels: [
-    { kicker: 'Tidepool Reef · 1', title: 'The reef needs a common plan', body: 'The tidepool crew has pieces with different-sized parts. They need a common ground.', art: '🐚', idea: 'Equivalent fractions name the same amount in different ways.' },
-    { kicker: 'Tidepool Reef · 2', title: 'Make the pieces match', body: 'Danish wants to rush. Mei draws a fraction wall so everyone can see the same-sized pieces.', art: '🧩', idea: 'A common denominator lets us combine like-sized pieces.' },
-    { kicker: 'Tidepool Reef · 3', title: 'A cleaner answer', body: 'The crew spots a fraction that can shrink. Otto asks: “Is it in simplest form?”', art: '🪸', idea: 'Simplest form keeps the value while removing shared factors.' },
+    { kicker: 'Tidepool Reef · 1', title: 'Different names, same amount', body: 'The reef crew needs a common plan. Some fractions can look different but cover the same amount.', art: '🐚', idea: 'Equivalent fractions keep the same value.', visual: 'equivalent' },
+    { kicker: 'Tidepool Reef · 2', title: 'Make the pieces match', body: 'Mei draws a fraction wall so everyone can compare pieces at a glance.', art: '🧩', idea: 'A common denominator gives us equal-sized pieces.', visual: 'wall' },
+    { kicker: 'Tidepool Reef · 3', title: 'A cleaner answer', body: 'The crew spots a fraction that can shrink without changing its value.', art: '🪸', idea: 'Simplest form removes shared factors.', visual: 'simplify' },
   ] },
   hard: { title: 'The Shrinking Share', panels: [
-    { kicker: 'Summit Peak · 1', title: 'A slice of a slice', body: 'The mountain crew must split a small share from a larger share. Pictures show what the symbols mean.', art: '🏔️', idea: 'Multiplication can find a fraction of a fraction.' },
-    { kicker: 'Summit Peak · 2', title: 'How many fit?', body: 'The bridge team asks how many quarter-lengths fit inside three whole lengths.', art: '🌉', idea: 'Division can mean counting how many groups fit.' },
-    { kicker: 'Summit Peak · 3', title: 'Read the whole story', body: 'A bar model helps the architects track the whole, the parts, and the remainder.', art: '🧭', idea: 'A model makes multi-step fraction stories easier to explain.' },
+    { kicker: 'Summit Peak · 1', title: 'A slice of a slice', body: 'The mountain crew combines two fraction ideas. Start with the picture, then use the rule.', art: '🏔️', idea: 'Multiplication can find a fraction of a fraction.', visual: 'area' },
+    { kicker: 'Summit Peak · 2', title: 'How many fit?', body: 'The bridge team counts how many quarter-lengths fit inside three whole lengths.', art: '🌉', idea: 'Division can mean counting equal groups.', visual: 'divide' },
+    { kicker: 'Summit Peak · 3', title: 'Read the whole story', body: 'A bar model keeps track of the whole, the parts, and the remainder.', art: '🧭', idea: 'A model makes multi-step stories easier to explain.', visual: 'bar' },
   ] },
 };
