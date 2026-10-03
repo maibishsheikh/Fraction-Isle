@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { equals, frac } from '../../core/fraction/index.js';
 import { Frac } from './FractionBuilder.jsx';
+import Clock from '../fraction/Clock.jsx';
+import Cup from '../fraction/Cup.jsx';
 
 export const GADGETS = [
   { key: 'sandwich', icon: '🥪', name: 'Sandwich', goal: 'Make half a sandwich', opts: [2, 4], target: [1, 2] },
@@ -17,7 +19,7 @@ function Gadget({ g, p, k, setP, setK }) {
   return (
     <div className="gadget" data-gadget={g.key}>
       {g.opts.length > 1 && <div className="cutter-steps" aria-label="Marks">{g.opts.map((v) => <button key={v} className={v === p ? 'on' : ''} onClick={() => setP(v)}>{v}</button>)}</div>}
-      {g.key === 'clock' && <div className="clock-face" style={{ background: `conic-gradient(var(--sun-500) ${(k / p) * 360}deg, #fff 0)` }} aria-label={`${(k * 60) / p} minutes past`} />}
+      {g.key === 'clock' && <Clock minutes={(k * 60) / p} />}{g.key === 'bottle' && <Cup parts={p} filled={k} variant="bottle" onMark={setK} />}
       <div className={`gadget-strip ${line ? 'line' : ''}`} role="group" aria-label={g.name}>
         {Array.from({ length: cells }, (_, i) => {
           const val = line ? i : i + 1;

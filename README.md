@@ -20,3 +20,9 @@ The current redesign follows the v2 flow: Home level map → 9-stop level trail 
 - `src/styles/` owns the tropical paper-cut design tokens and responsive layout.
 
 Next implementation slice: replace the generic game-choice rounds with the named touch interactions from the spec—Pizza Slicer, Fraction Fishing, Reef Café, Bridge Builder, Bar-Model Detective, and the remaining mini-games.
+
+## Audio
+`npm run audio:manifest` lists every narration line; `ELEVENLABS_API_KEY=… ELEVENLABS_VOICE_ID=… npm run audio:generate` renders missing clips to `public/audio/`. `useAudio().say(text)` plays a clip by id; `utils/sfx.js` has the WebAudio effects.
+
+## Choices where the spec was ambiguous
+Pizza Slicer and Wall/Ribbon labs use a 12-notch bar instead of the 24-notch pizza; Fraction Fishing is a still row of fish (no drift).

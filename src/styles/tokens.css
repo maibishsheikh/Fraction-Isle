@@ -2,3 +2,16 @@
 [data-level="beginner"] { --accent:var(--sun-500); --accent-2:var(--coral-500); --sky:var(--sky-sunrise); }
 [data-level="builder"] { --accent:var(--lagoon-500); --accent-2:var(--teal-500); --sky:var(--sky-lagoon); }
 [data-level="advanced"] { --accent:var(--violet-500); --accent-2:var(--magenta-400); --sky:var(--sky-twilight); }
+
+:root{
+  --pink-500:#F06BA8;
+  --storm-700:#28508A;
+  --err-500:#E5484D;
+  --glow:0 0 0 4px rgba(255,201,60,.55);
+  --ease-out:cubic-bezier(.2,.8,.2,1);
+  --ph-wonder:#FFC93C;
+  --ph-story:#1AA7C4;
+  --ph-simulate:#7A5AF8;
+  --ph-play:#F06BA8;
+  --ph-reflect:#3FBF7F;
+}

@@ -85,3 +85,51 @@ describe('Fishing, Wall and Area labs', () => {
     const t = ADVANCED_LAB_A.guided[2]; expect((t.c * t.r) / (t.cols * t.rows)).toBe(0.5);
   });
 });
+
+import { BUILDER_LAB_C } from '../src/content/builder/labC.js';
+import { ADVANCED_LABS } from '../src/content/advanced/labsBCD.js';
+import { shareOf } from '../src/components/labs/SetLab.jsx';
+import { piecesIn } from '../src/components/labs/RibbonLab.jsx';
+import { ACTIONS, spend } from '../src/components/labs/BarLab.jsx';
+describe('Sale Shop, Ribbon, Bar model and Spinner labs', () => {
+  it('sale shop tasks: groups divide the set; amounts match the spec', () => {
+    BUILDER_LAB_C.guided.forEach((t) => expect(t.total % t.g).toBe(0));
+    expect(BUILDER_LAB_C.guided.map((t) => shareOf(t.total, t.take, t.g))).toEqual([12, 9, 16]);
+  });
+  it('ribbon tasks: 2÷1/2=4, 2÷1/3=6, 3÷1/4=12', () => {
+    expect(ADVANCED_LABS.b.guided.map((t) => piecesIn(t.len, t.d))).toEqual([4, 6, 12]);
+  });
+  it('bar tasks are playable and leave 16, 8, 6', () => {
+    const left = ADVANCED_LABS.c.guided.map((t) => t.steps.reduce((l, s) => { const x = spend(t.T, l, ACTIONS[s]); expect(x).not.toBeNull(); return l - x; }, t.T));
+    expect(left).toEqual([16, 8, 6]);
+  });
+  it('spinner tasks fit 12 sectors', () => { ADVANCED_LABS.d.guided.forEach((t) => expect(t.n).toBeLessThanOrEqual(12)); });
+});
+
+import { subsetsSummingTo } from '../src/core/helpers.js';
+import { PIZZA, HUNT, BRIDGE } from '../src/content/games3.js';
+describe('Pizza, Hunt, Bridge', () => {
+  it('pizza orders fit a 12-notch bar', () => { PIZZA.rounds.forEach((r) => { expect(12 % r.N).toBe(0); expect(r.k).toBeLessThanOrEqual(r.N); }); });
+  it('hunt: 3 correct items per scene, 6 total', () => { HUNT.rounds.forEach((s) => { expect(s.items).toHaveLength(6); expect(s.items.filter((x) => x.ok)).toHaveLength(3); s.items.filter((x) => !x.ok).forEach((x) => expect(x.why.length).toBeGreaterThan(0)); }); });
+  it('every bridge round is solvable', () => { BRIDGE.rounds.forEach((r) => expect(subsetsSummingTo(r.planks.map(([n, d]) => frac(n, d)), frac(r.gap[0], r.gap[1])).length).toBeGreaterThan(0)); });
+});
+
+import * as G7 from '../src/content/games7.js';
+import { ACTIONS as BAR_ACTIONS, spend as barSpend } from '../src/components/labs/BarLab.jsx';
+describe('Builder/Advanced task games', () => {
+  const all = Object.values(G7);
+  it('every game is a tasks game with known misconception tags', () => { all.forEach((g) => { expect(g.kind).toBe('tasks'); g.rounds.forEach((r) => expect(MISCONCEPTIONS[r.tag]).toBeTruthy()); }); });
+  it('every round is solvable', () => {
+    all.forEach((g) => g.rounds.forEach((r) => {
+      const t = r.task;
+      if (r.sim === 'WallLab') expect((t.target[0] * t.row) % t.target[1]).toBe(0);
+      if (r.sim === 'SetLab') { expect(t.total % t.g).toBe(0); expect(t.take).toBeLessThanOrEqual(t.g); }
+      if (r.sim === 'AreaLab') { expect(t.c).toBeLessThanOrEqual(t.cols); expect(t.r).toBeLessThanOrEqual(t.rows); }
+      if (r.sim === 'RibbonLab') expect(t.len * t.d).toBeGreaterThan(0);
+      if (r.sim === 'BarLab') t.steps.reduce((l, s) => { const x = barSpend(t.T, l, BAR_ACTIONS[s]); expect(x).not.toBeNull(); return l - x; }, t.T);
+      if (r.sim === 'SpinnerLab') expect(t.n).toBeLessThanOrEqual(12);
+    }));
+  });
+  it('shop answers match the order text', () => { expect(G7.ISLAND_SHOP.rounds.map((r) => (r.task.total * r.task.take) / r.task.g)).toEqual([9, 15, 8, 16, 15]); });
+  it('area products are right', () => { expect(G7.SUMMIT_GARDEN.rounds.map((r) => `${r.task.c * r.task.r}/${r.task.cols * r.task.rows}`)).toEqual(['1/4', '6/12', '1/6', '6/12']); });
+});

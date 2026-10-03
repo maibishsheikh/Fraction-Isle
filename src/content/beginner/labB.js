@@ -10,7 +10,7 @@ export const LAB_B = {
     { key: 'stars', label: 'Shade 3/8 of the stars', required: false },
   ] },
   guided: [
-    { id: 'b-b-0', goal: 'Bar: show 2/3.', narration: 'Bar: show two thirds.', shape: 'bar', n: 2, d: 3, start: 4 },
+    { id: 'b-b-0', goal: 'Pizza: show 2/3.', narration: 'Pizza: show two thirds.', shape: 'pie', n: 2, d: 3, start: 4 },
     { id: 'b-b-1', goal: 'Bar: show 5/6.', narration: 'Bar: show five sixths.', shape: 'bar', n: 5, d: 6, start: 4 },
     { id: 'b-b-2', goal: 'Stars: show 3/8.', narration: 'Stars: show three eighths.', shape: 'stars', n: 3, d: 8 },
     { id: 'b-b-3', goal: 'Make the bar read 3/4.', narration: 'Make the bar read three fourths.', shape: 'bar', read: [3, 4], start: 6 },

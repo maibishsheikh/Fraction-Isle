@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { equals, frac } from '../../core/fraction/index.js';
+import Pie from '../fraction/Pie.jsx';
 
 const DIAL = [2, 3, 4, 5, 6, 8];
 const WORDS = { 1: 'one', 2: 'two', 3: 'three', 4: 'four', 5: 'five', 6: 'six', 7: 'seven', 8: 'eight' };
@@ -30,11 +31,11 @@ export default function FractionBuilder({ task = null, demo = 0, onDiscover = ()
 
   return (
     <div className="builder">
-      {!task?.shape && <div className="cutter-modes">{[['bar', 'Bar'], ['stars', 'Stars']].map(([s, t]) => <button key={s} className={s === shape ? 'on' : ''} onClick={() => { setShape(s); setOn([]); }}>{t}</button>)}</div>}
-      {shape === 'bar' && <div className="cutter-steps" aria-label="Bottom number">{DIAL.map((v) => <button key={v} className={v === d ? 'on' : ''} onClick={() => dial(v)}>{v}</button>)}</div>}
-      <div className={shape === 'stars' ? 'builder-stars' : 'cutter-bar'} role="group" aria-label={`${parts} equal parts, ${n} shaded`}>
+      {!task?.shape && <div className="cutter-modes">{[['bar', 'Bar'], ['pie', 'Pizza'], ['stars', 'Stars']].map(([s, t]) => <button key={s} className={s === shape ? 'on' : ''} onClick={() => { setShape(s); setOn([]); }}>{t}</button>)}</div>}
+      {shape !== 'stars' && <div className="cutter-steps" aria-label="Bottom number">{DIAL.map((v) => <button key={v} className={v === d ? 'on' : ''} onClick={() => dial(v)}>{v}</button>)}</div>}
+      {shape === 'pie' ? <div className="builder-pie"><Pie parts={parts} on={on} size={180} onPart={tap} /></div> : <div className={shape === 'stars' ? 'builder-stars' : 'cutter-bar'} role="group" aria-label={`${parts} equal parts, ${n} shaded`}>
         {Array.from({ length: parts }, (_, i) => <button key={i} className={on.includes(i) ? 'shaded' : ''} aria-pressed={on.includes(i)} aria-label={`Part ${i + 1}`} onClick={() => tap(i)}>{shape === 'stars' ? '★' : ''}</button>)}
-      </div>
+      </div>}
       <div className="readout"><Frac n={n} d={parts} pulse={pulse} /><span>{WORDS[n] || n} of {WORDS[parts]} equal parts{n === parts && n > 0 ? ' = one whole' : ''}</span></div>
       {!task && <button className="secondary" onClick={countUp}>Count up ▶</button>}
     </div>

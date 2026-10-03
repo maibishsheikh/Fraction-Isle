@@ -1,10 +1,15 @@
 import { useState } from 'react';
 import Pie from '../fraction/Pie.jsx';
+import Cup from '../fraction/Cup.jsx';
+import Clock from '../fraction/Clock.jsx';
 import { Frac } from '../labs/FractionBuilder.jsx';
 
 export const Pic = ({ p }) => {
   const [kind, parts, n] = p;
   if (kind === 'pie') return <Pie parts={parts} shaded={n} size={96} />;
+  if (kind === 'cup') return <Cup parts={parts} filled={n} size={84} />;
+  if (kind === 'clock') return <Clock minutes={(60 * n) / parts} size={84} />;
+  if (kind === 'uneven') return <div className="cutter-bar fish-bar" role="img" aria-label="uneven pieces">{[1, 2, 5].map((w, i) => <i key={i} style={{ flex: w }} className={i === 0 ? 'hot' : ''} />)}</div>;
   if (kind === 'set') return <div className="fish-set" role="img" aria-label={`${n} red of ${parts}`}>{Array.from({ length: parts }, (_, i) => <span key={i}>{i < n ? '🍎' : '🍏'}</span>)}</div>;
   return <div className="cutter-bar fish-bar" role="img" aria-label={`${n} of ${parts} shaded`}>{Array.from({ length: parts }, (_, i) => <i key={i} style={{ flex: 1 }} className={i < n ? 'hot' : ''} />)}</div>;
 };

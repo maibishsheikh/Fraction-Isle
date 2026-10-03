@@ -1,0 +1,6 @@
+/* Phase colours for the level phase bar */
+.phase-nav button{border-bottom:5px solid transparent}
+.phase-nav button[data-phase=wonder]{border-color:var(--ph-wonder)}.phase-nav button[data-phase=story]{border-color:var(--ph-story)}
+.phase-nav button[data-phase=simulate]{border-color:var(--ph-simulate)}.phase-nav button[data-phase=play]{border-color:var(--ph-play)}
+.phase-nav button[data-phase=reflect]{border-color:var(--ph-reflect)}
+.phase-nav button.active{box-shadow:var(--glow)}.phase-nav button.done::after{content:' ✓'}
